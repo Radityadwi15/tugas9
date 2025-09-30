@@ -1,7 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $host = "localhost";
-$user = "root";
-$pass = "";
+$user = "xirpl1-27";
+$pass = "0098347903";
 $db   = "db_toko";
 
 $koneksi = mysqli_connect($host, $user, $pass, $db);
