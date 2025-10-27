@@ -1,11 +1,12 @@
-<?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-include "koneksi.php"; 
+<?php
+include 'koneksi.php';
 $id = $_GET['id'];
 
-mysqli_query($koneksi, "DELETE FROM buku WHERE id_barang='$id'");
+$hapus = mysqli_query($conn, "DELETE FROM prabot_dapur WHERE id_prabot=$id");
 
-echo "<script>alert('Data berhasil dihapus!');window.location='index.php';</script>";
+if ($hapus) {
+  echo "<script>alert('Data berhasil dihapus'); window.location='index.php';</script>";
+} else {
+  echo "<script>alert('Gagal menghapus data'); window.location='index.php';</script>";
+}
 ?>

@@ -1,95 +1,94 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-include "koneksi.php"; ?>
+<?php include 'koneksi.php'; ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Data Barang</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    h2 {
-      text-align: center;
-      padding: 20px;
-      color: white;
-    }
-    table {
-      width: 80%;
-      margin: auto;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    }
-    th, td {
-      padding: 12px;
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-    th {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-    }
-    a {
-      text-decoration: none;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 5px;
-    }
-    .btn-tambah {
-      display: inline-block;
-      margin: 20px auto;
-      background: linear-gradient(135deg, #43e97b, #38f9d7);
-    }
-    .btn-ubah {
-      background: linear-gradient(135deg, #f7971e, #ffd200);
-    }
-    .btn-hapus {
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    }
-    .btn-tambah:hover, .btn-ubah:hover, .btn-hapus:hover {
-      opacity: 0.8;
-    }
-    .container {
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Data Prabot Dapur</title>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+  }
+  table {
+    margin: 30px auto;
+    border-collapse: collapse;
+    width: 80%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+  th {
+    background: #764ba2;
+    color: white;
+  }
+  tr:hover { background-color: #f1f1f1; }
+  a.button {
+    text-decoration: none;
+    color: white;
+    background: #667eea;
+    padding: 8px 14px;
+    border-radius: 5px;
+    margin: 5px;
+    transition: 0.3s;
+  }
+  a.button:hover { background: #5a67d8; }
+  .tambah {
+    display: block;
+    width: 150px;
+    text-align: center;
+    margin: 20px auto;
+    background: #48bb78;
+  }
+</style>
 </head>
 <body>
-  <h2>Data Barang</h2>
-  <div class="container">
-    <a href="tambah.php" class="btn-tambah">+ Tambah Barang</a>
-  </div>
-  <table>
-    <tr>
-      <th>ID Barang</th>
-      <th>Nama Barang</th>
-      <th>Stok</th>
-      <th>Harga</th>
-      <th>Aksi</th>
-    </tr>
-    <?php
-    $result = mysqli_query($koneksi, "SELECT * FROM buku");
-    while ($row = mysqli_fetch_assoc($result)) {
-    ?>
-    <tr>
-      <td><?= $row['id_barang']; ?></td>
-      <td><?= $row['nama_barang']; ?></td>
-      <td><?= $row['stok']; ?></td>
-      <td>Rp <?= number_format($row['harga'],0,',','.'); ?></td>
-      <td>
-        <a href="ubah.php?id=<?= $row['id_barang']; ?>" class="btn-ubah">Ubah</a>
-        <a href="hapus.php?id=<?= $row['id_barang']; ?>" class="btn-hapus" onclick="return confirm('Yakin ingin hapus?')">Hapus</a>
-      </td>
-    </tr>
-    <?php } ?>
-  </table>
+
+<h1>📦 Data Prabot Dapur</h1>
+
+<a href="tambah.php" class="button tambah">+ Tambah Data</a>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nama Prabot</th>
+    <th>Stok</th>
+    <th>Harga</th>
+    <th>Aksi</th>
+  </tr>
+
+  <?php
+  $query = mysqli_query($conn, "SELECT * FROM prabot_dapur");
+  while ($data = mysqli_fetch_assoc($query)) {
+  ?>
+  <tr>
+    <td><?= $data['id_prabot'] ?></td>
+    <td><?= $data['nama_prabot'] ?></td>
+    <td><?= $data['stok'] ?></td>
+    <td>Rp<?= number_format($data['harga'], 0, ',', '.') ?></td>
+    <td>
+      <a href="ubah.php?id=<?= $data['id_prabot'] ?>" class="button">Ubah</a>
+      <a href="hapus.php?id=<?= $data['id_prabot'] ?>" class="button" style="background:#e53e3e;" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+    </td>
+  </tr>
+  <?php } ?>
+</table>
+
 </body>
 </html>
+
+
+
