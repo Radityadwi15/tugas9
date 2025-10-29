@@ -1,4 +1,8 @@
-<?php include 'koneksi.php';
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include 'koneksi.php';
 $id = $_GET['id'];
 $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM prabot_dapur WHERE id_prabot=$id"));
 ?>
